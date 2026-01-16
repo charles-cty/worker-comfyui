@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# Prepare models
+mkdir -p /workspace/ComfyUI/models/{diffusion_models,text_encoders,loras,vae}
+curl -L -o /workspace/ComfyUI/models/text_encoders/qwen_3_4b.safetensors "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/text_encoders/qwen_3_4b.safetensors"
+curl -L -o /workspace/ComfyUI/models/diffusion_models/z_image_turbo_bf16.safetensors "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/diffusion_models/z_image_turbo_bf16.safetensors"
+curl -L -o /workspace/ComfyUI/models/vae/ae.safetensors "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/vae/ae.safetensors"
+
 # Use libtcmalloc for better memory management
 TCMALLOC="$(ldconfig -p | grep -Po "libtcmalloc.so.\d" | head -n 1)"
 export LD_PRELOAD="${TCMALLOC}"
